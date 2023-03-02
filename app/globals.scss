@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -85,23 +90,50 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+
 
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+$nav-thickness: 4rem;
+
+.navbar {
+  height: $nav-thickness;
+  z-index: 1000;
+  @apply w-screen fixed bottom-0 left-0 right-0 bg-light p-2;
+
+  .active {
+    @apply border-2 p-2 rounded-2xl shadow-xl border-primary scale-110 hover:scale-125 transition ease-in-out duration-150;
+  }
+
+  .inactive {
+    @apply border-2 p-2 rounded-2xl shadow-xl border-transparent hover:scale-110 transition ease-in-out duration-150;
   }
 }
+.main {
+  // height: calc(100vh - 4rem);
+  min-height: 100vh;
+  padding-bottom: calc($nav-thickness);
+  overflow-x: hidden;
+  overflow-y: auto;
+  @apply w-screen;
+}
+
+@screen lg {
+  $nav-thickness: 12rem;
+  .navbar {
+    width: $nav-thickness;
+    @apply h-screen ;
+  }
+
+  .main {
+    margin-left: $nav-thickness;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: calc(100vw - $nav-thickness);
+    @apply h-screen mb-0;
+  }
+}
+
